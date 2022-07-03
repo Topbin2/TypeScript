@@ -1,27 +1,30 @@
 import React, { useState } from "react";
 
-import GuestForm from "./GuestForm";
-
-const initialState = ["sangbin", "kong"];
-
 const GuestList = () => {
-  const [guest, setGuest] = useState(initialState);
+  const [name, setName] = useState("");
+  const [guests, setGuest] = useState<string[]>([]);
 
-  const addGuest = (name: string) => {
-    setGuest((prev) => [...prev, name]);
-  }
+  const onClick = () => {
+    console.log(typeof name);
+    setGuest([...guests, name]);
+    setName("");
+  };
 
   return (
-    <>
-      <h1>Party Guest List</h1>
+    <div>
+      <h3>Guest List</h3>
       <ul>
-        {guest.map((guest, index) => (
-          <li key={index}>{guest}</li>
+        {guests.map((guest) => (
+          <li key={guest}>{guest}</li>
         ))}
       </ul>
-      <br />
-      <GuestForm addGuest={addGuest} />
-    </>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <button onClick={onClick}>Add Guest</button>
+    </div>
   );
 };
 
