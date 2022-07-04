@@ -1,5 +1,33 @@
-const CartItem = () => {
-  return <div>CartItem</div>;
+import { ChevronDown, ChevronUp } from "../icons";
+
+interface IProps {
+  id: string;
+  img: string;
+  title: string;
+  price: string;
+  amount: number;
+}
+
+const CartItem = ({ id, img, title, price, amount }: IProps) => {
+  return (
+    <article className="cart-item">
+      <img src={img} alt={title} />
+      <div>
+        <h4>{title}</h4>
+        <h4 className="item-price">${price}</h4>
+        <button className="remove-btn">remove</button>
+      </div>
+      <div>
+        <button className="amount-btn">
+          <ChevronUp />
+        </button>
+        <p className="amount">{amount}</p>
+        <button className="amount-btn">
+          <ChevronDown />
+        </button>
+      </div>
+    </article>
+  );
 };
 
 export default CartItem;

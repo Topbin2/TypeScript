@@ -1,8 +1,17 @@
 import { useAppSelector } from "../hooks/useAppSelector";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useCallback } from "react";
+
+import { clearCart } from "../reducers/cart/cartSlice";
 import CartItem from "./CartItem";
 
 const CartContainer = () => {
+  const dispatch = useAppDispatch();
   const { cartItems, amount, total } = useAppSelector((state) => state.cart);
+
+  const handleDeleteItems = useCallback(() => {
+    dispatch(clearCart());
+  }, [dispatch]);
 
   if (amount < 1) {
     return (
@@ -32,7 +41,9 @@ const CartContainer = () => {
             total <span>${total}</span>
           </h4>
         </div>
-        <button className="btn clear-btn">clear cart</button>
+        <button className="btn clear-btn" onClick={handleDeleteItems}>
+          clear cart
+        </button>
       </footer>
     </section>
   );
