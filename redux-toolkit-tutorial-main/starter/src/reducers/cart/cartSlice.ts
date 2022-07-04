@@ -18,7 +18,7 @@ interface CartItem {
 
 const initialState: CartState = {
   cartItems: cartItems,
-  amount: 5,
+  amount: 0,
   total: 0,
   isLoading: true,
 };
@@ -43,9 +43,20 @@ const cartSlice = createSlice({
       const item = state.cartItems.find((item) => item.id === action.payload);
       item && item.amount--;
     },
+    calculateTotals: (state) => {
+      let amount = 0,
+        total = 0;
+      state.cartItems.forEach((item) => {
+        amount += item.amount;
+        total += item.amount * Number(item.price);
+      });
+      state.amount = amount;
+      state.total = total;
+    },
   },
 });
 
-export const { clearCart, removeItem, increase, decrease } = cartSlice.actions;
+export const { clearCart, removeItem, increase, decrease, calculateTotals } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
