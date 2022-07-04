@@ -1,26 +1,33 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import cartItems from "../../cartItems";
 
 interface CartState {
-  cartItems: string[],
-  amount: number,
-  total: number,
-  isLoading: boolean,
+  cartItems: CartItem[];
+  amount: number;
+  total: number;
+  isLoading: boolean;
+}
+
+interface CartItem {
+  id: string;
+  title: string;
+  price: string;
+  img: string;
+  amount: number;
 }
 
 const initialState: CartState = {
-  cartItems: [],
-  amount: 0,
+  cartItems: cartItems,
+  amount: 5,
   total: 0,
   isLoading: true,
 };
 
 const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState,
-  reducers: {
-    
-  }
-})
+  reducers: {},
+});
 
 // console.log(cartSlice);
 
