@@ -1,8 +1,7 @@
+import { createSlice } from "@reduxjs/toolkit";
+
 import { CartState } from "./../../interfaces/cart";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getCartItems } from "../../actions/cart";
-import { url } from "../../config/config";
-import axios from "axios";
 
 const initialState: CartState = {
   cartItems: [],
@@ -10,18 +9,6 @@ const initialState: CartState = {
   total: 0,
   isLoading: true,
 };
-
-// export const getCartItems = createAsyncThunk(
-//   "cart/getCartItems",
-//   async (data, thunkAPI) => {
-//     try {
-//       const response = await axios.get(url);
-//       return response.data;
-//     } catch (error: any) {
-//       return thunkAPI.rejectWithValue(error.response.data);
-//     }
-//   }
-// );
 
 const cartSlice = createSlice({
   name: "cart",
