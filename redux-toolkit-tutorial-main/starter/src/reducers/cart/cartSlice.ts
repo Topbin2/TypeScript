@@ -1,7 +1,8 @@
 import { CartState } from "./../../interfaces/cart";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import cartItems from "../../cartItems";
+import { getCartItems } from "../../actions/cart";
 import { url } from "../../config/config";
+import axios from "axios";
 
 const initialState: CartState = {
   cartItems: [],
@@ -10,11 +11,17 @@ const initialState: CartState = {
   isLoading: true,
 };
 
-export const getCartItems = createAsyncThunk("cart/getCartItems", () => {
-  return fetch(url)
-    .then((res) => res.json())
-    .catch((err: any) => console.log(err));
-});
+// export const getCartItems = createAsyncThunk(
+//   "cart/getCartItems",
+//   async (data, thunkAPI) => {
+//     try {
+//       const response = await axios.get(url);
+//       return response.data;
+//     } catch (error: any) {
+//       return thunkAPI.rejectWithValue(error.response.data);
+//     }
+//   }
+// );
 
 const cartSlice = createSlice({
   name: "cart",
@@ -53,11 +60,11 @@ const cartSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getCartItems.fulfilled, (state, action) => {
-        console.log(action);
         state.isLoading = false;
         state.cartItems = action.payload;
       })
-      .addCase(getCartItems.rejected, (state) => {
+      .addCase(getCartItems.rejected, (state, action) => {
+        console.log(action.error.message);
         state.isLoading = false;
       }),
 });

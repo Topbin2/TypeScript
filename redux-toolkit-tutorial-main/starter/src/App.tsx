@@ -4,7 +4,8 @@ import Modal from "./components/Modal";
 import { useAppSelector } from "./hooks/useAppSelector";
 import { useAppDispatch } from "./hooks/useAppDispatch";
 import { useEffect } from "react";
-import { calculateTotals, getCartItems } from "./reducers/cart/cartSlice";
+import { calculateTotals } from "./reducers/cart/cartSlice";
+import { getCartItems } from "./actions/cart";
 
 function App() {
   const dispatch = useAppDispatch();
