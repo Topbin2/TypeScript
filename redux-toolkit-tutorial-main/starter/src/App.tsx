@@ -9,6 +9,7 @@ import { calculateTotals } from "./reducers/cart/cartSlice";
 function App() {
   const dispatch = useAppDispatch();
   const { cartItems } = useAppSelector((state) => state.cart);
+  const { isOpen } = useAppSelector((state) => state.modal);
 
   useEffect(() => {
     dispatch(calculateTotals());
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <main>
-      <Modal />
+      {isOpen && <Modal />}
       <Navbars />
       <CartContainer />
     </main>
