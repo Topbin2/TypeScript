@@ -1,5 +1,5 @@
 import { useAppSelector } from "../hooks/useAppSelector";
-import { CartIcon } from "../icons";
+import { CartIcon } from "../assets/icons/icons";
 
 const Navbars = () => {
   const { amount } = useAppSelector((state) => state.cart);

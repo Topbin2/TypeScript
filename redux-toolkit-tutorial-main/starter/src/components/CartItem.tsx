@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { ChevronDown, ChevronUp } from "../icons";
+import { ChevronDown, ChevronUp } from "../assets/icons/icons";
 
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { decrease, increase, removeItem } from "../reducers/cart/cartSlice";
