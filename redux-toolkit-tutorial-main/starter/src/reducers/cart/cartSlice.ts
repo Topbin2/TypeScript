@@ -1,27 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { CartState } from "./../../interfaces/cart";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import cartItems from "../../cartItems";
-
-interface CartState {
-  cartItems: CartItem[];
-  amount: number;
-  total: number;
-  isLoading: boolean;
-}
-
-interface CartItem {
-  id: string;
-  title: string;
-  price: string;
-  img: string;
-  amount: number;
-}
+import { url } from "../../config/config";
 
 const initialState: CartState = {
-  cartItems: cartItems,
+  cartItems: [],
   amount: 0,
   total: 0,
   isLoading: true,
 };
+
+export const getCartItems = createAsyncThunk("cart/getCartItems", () => {
+  return fetch(url)
+    .then((res) => res.json())
+    .catch((err: any) => console.log(err));
+});
 
 const cartSlice = createSlice({
   name: "cart",
@@ -54,6 +47,19 @@ const cartSlice = createSlice({
       state.total = total;
     },
   },
+  extraReducers: (builder) =>
+    builder
+      .addCase(getCartItems.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getCartItems.fulfilled, (state, action) => {
+        console.log(action);
+        state.isLoading = false;
+        state.cartItems = action.payload;
+      })
+      .addCase(getCartItems.rejected, (state) => {
+        state.isLoading = false;
+      }),
 });
 
 export const { clearCart, removeItem, increase, decrease, calculateTotals } =

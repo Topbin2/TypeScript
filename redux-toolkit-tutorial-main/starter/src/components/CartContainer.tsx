@@ -3,6 +3,7 @@ import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useCallback } from "react";
 
 import { clearCart } from "../reducers/cart/cartSlice";
+import { openModal } from "../reducers/modal/modalSlice";
 import CartItem from "./CartItem";
 
 const CartContainer = () => {
@@ -10,7 +11,8 @@ const CartContainer = () => {
   const { cartItems, amount, total } = useAppSelector((state) => state.cart);
 
   const handleDeleteItems = useCallback(() => {
-    dispatch(clearCart());
+    dispatch(openModal());
+    // dispatch(clearCart());
   }, [dispatch]);
 
   if (amount < 1) {
