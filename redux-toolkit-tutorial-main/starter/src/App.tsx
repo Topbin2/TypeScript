@@ -1,5 +1,6 @@
 import Navbars from "./components/Navbars";
 import CartContainer from "./components/CartContainer";
+import Modal from "./components/Modal";
 import { useAppSelector } from "./hooks/useAppSelector";
 import { useAppDispatch } from "./hooks/useAppDispatch";
 import { useEffect } from "react";
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <main>
+      <Modal />
       <Navbars />
       <CartContainer />
     </main>

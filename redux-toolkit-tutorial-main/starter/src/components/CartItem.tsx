@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { ChevronDown, ChevronUp } from "../icons";
 
 import { useAppDispatch } from "../hooks/useAppDispatch";
