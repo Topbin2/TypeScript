@@ -10,11 +10,8 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    log: (state) => {
-      console.log(state.isLoading);
-    }
+
   },
 });
 
-export const { log } = userSlice.actions;
 export default userSlice.reducer;
