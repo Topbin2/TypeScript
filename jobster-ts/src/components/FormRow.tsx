@@ -1,9 +1,26 @@
-import React from 'react';
+import { ChangeEvent } from "react";
 
-const FormRow = () => {
+interface IProps {
+  type: string;
+  name: string;
+  value: string;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  labelText?: string;
+}
+
+const FormRow = ({ type, name, value, handleChange, labelText }: IProps) => {
   return (
-    <div>
-      
+    <div className="form-row">
+      <label htmlFor={name} className="form-label">
+        {name}
+      </label>
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={handleChange}
+        className="form-input"
+      />
     </div>
   );
 };

@@ -1,6 +1,13 @@
-import { useState, useEffect, FormEvent, useCallback } from "react";
-import { Logo } from "../components";
+import { useState, FormEvent, useCallback, ChangeEvent } from "react";
+import { Logo, FormRow } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
+
+interface IState {
+  name: string;
+  email: string;
+  password: string;
+  isMember: boolean;
+}
 
 const initialState = {
   name: "",
@@ -10,10 +17,10 @@ const initialState = {
 };
 
 const Register = () => {
-  const [values, setValues] = useState(initialState);
+  const [values, setValues] = useState<IState>(initialState);
 
-  const handleChange = useCallback((e: FormEvent<HTMLInputElement>) => {
-    // console.log(e.target.value);
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target);
   }, []);
 
   const onSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
@@ -27,21 +34,27 @@ const Register = () => {
         <Logo />
         <h3>Login</h3>
         {/* name field */}
-        <div className="form-row">
-          <label htmlFor="name" className="form-label">
-            name
-          </label>
-          <input
-            className="form-input"
-            type="text"
-            name="name"
-            value={values.name}
-            onChange={handleChange}
-          />
-        </div>
-        <button className="btn btn-block">
-          submit
-        </button>
+        <FormRow
+          type="text"
+          name="name"
+          value={values.name}
+          handleChange={handleChange}
+        />
+        {/* name field */}
+        <FormRow
+          type="email"
+          name="email"
+          value={values.email}
+          handleChange={handleChange}
+        />
+        {/* name field */}
+        <FormRow
+          type="password"
+          name="password"
+          value={values.password}
+          handleChange={handleChange}
+        />
+        <button className="btn btn-block">submit</button>
       </form>
     </Wrapper>
   );
