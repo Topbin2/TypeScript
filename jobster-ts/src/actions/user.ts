@@ -1,15 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+interface UserState {
+  email: string;
+  password: string;
+  name?: string;
+}
+
 export const registerUser = createAsyncThunk(
   "user/registerUser",
-  async (user, thunkAPI) => {
-    console.log(`Register User : ${user}`);
+  async (user: UserState, thunkAPI) => {
+    console.log(`Register User : ${JSON.stringify(user)}`);
   }
 );
 
 export const loginUser = createAsyncThunk(
   "user/loginUser",
-  async (user, thunkAPI) => {
-    console.log(`Login User : ${user}`);
+  async (user: UserState, thunkAPI) => {
+    console.log(`Login User : ${JSON.stringify(user)}`);
   }
 );

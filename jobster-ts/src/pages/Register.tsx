@@ -2,7 +2,9 @@ import { useState, FormEvent, useCallback, ChangeEvent } from "react";
 
 import { Logo, FormRow } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { loginUser, registerUser } from "../actions/user";
 
 interface IState {
   name: string;
@@ -21,20 +23,34 @@ const initialState = {
 const Register = () => {
   const [values, setValues] = useState<IState>(initialState);
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setValues({ ...values, [name]: value });
-  }, [values]);
+  const { user, isLoading } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
-  const onSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const { name, email, password, isMember } = values;
-    if(!email || !password || (!isMember && !name)) {
-      toast.error('Please Fill Out All Fields');
-    }
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const name = e.target.name;
+      const value = e.target.value;
+      setValues({ ...values, [name]: value });
+    },
+    [values]
+  );
 
-  }, [values]);
+  const onSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const { name, email, password, isMember } = values;
+      if (!email || !password || (!isMember && !name)) {
+        toast.error("Please Fill Out All Fields");
+        return;
+      }
+      if (isMember) {
+        dispatch(loginUser({ email, password }));
+        return;
+      }
+      dispatch(registerUser({ name, email, password }));
+    },
+    [values, dispatch]
+  );
 
   const toggleMember = useCallback(() => {
     setValues({ ...values, isMember: !values.isMember });

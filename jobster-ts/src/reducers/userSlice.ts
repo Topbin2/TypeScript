@@ -1,5 +1,6 @@
 import { IUserState } from './../interfaces/user';
 import { createSlice } from "@reduxjs/toolkit";
+import { loginUser } from '../actions/user';
 
 const initialState: IUserState = {
   isLoading: false,
@@ -12,6 +13,11 @@ const userSlice = createSlice({
   reducers: {
 
   },
+  extraReducers: (builder) => builder
+    // login
+    .addCase(loginUser.pending, (state, action) => {
+
+    })
 });
 
 export default userSlice.reducer;
