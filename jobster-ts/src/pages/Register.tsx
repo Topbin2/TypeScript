@@ -1,6 +1,8 @@
 import { useState, FormEvent, useCallback, ChangeEvent } from "react";
+
 import { Logo, FormRow } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
+import { toast } from 'react-toastify';
 
 interface IState {
   name: string;
@@ -20,26 +22,39 @@ const Register = () => {
   const [values, setValues] = useState<IState>(initialState);
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target);
-  }, []);
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues({ ...values, [name]: value });
+  }, [values]);
 
   const onSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(e);
-  }, []);
+    const { name, email, password, isMember } = values;
+    if(!email || !password || (!isMember && !name)) {
+      toast.error('Please Fill Out All Fields');
+    }
+
+  }, [values]);
+
+  const toggleMember = useCallback(() => {
+    setValues({ ...values, isMember: !values.isMember });
+  }, [values]);
 
   return (
     <Wrapper>
       <form className="form" onSubmit={onSubmit}>
         <Logo />
-        <h3>Login</h3>
+        <h3>{values.isMember ? "Login" : "Register"}</h3>
         {/* name field */}
-        <FormRow
-          type="text"
-          name="name"
-          value={values.name}
-          handleChange={handleChange}
-        />
+        {!values.isMember && (
+          <FormRow
+            type="text"
+            name="name"
+            value={values.name}
+            handleChange={handleChange}
+          />
+        )}
+
         {/* name field */}
         <FormRow
           type="email"
@@ -55,6 +70,12 @@ const Register = () => {
           handleChange={handleChange}
         />
         <button className="btn btn-block">submit</button>
+        <p>
+          {values.isMember ? "Not a member yet?" : "Already a member?"}
+          <button type="button" onClick={toggleMember} className="member-btn">
+            {values.isMember ? "Register" : "Login"}
+          </button>
+        </p>
       </form>
     </Wrapper>
   );
