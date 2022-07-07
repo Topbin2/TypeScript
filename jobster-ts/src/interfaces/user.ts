@@ -1,5 +1,6 @@
 export interface IUserState {
   isLoading: boolean;
+  isSidebarOpen: boolean;
   user: UserInfo | null;
 }
 

@@ -9,13 +9,18 @@ import {
 
 const initialState: IUserState = {
   isLoading: false,
+  isSidebarOpen: false,
   user: getUserFromLocalStorage(),
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleSidebar: (state) => {
+      state.isSidebarOpen = !state.isSidebarOpen;
+    },
+  },
   extraReducers: (builder) =>
     builder
       // register
@@ -50,4 +55,5 @@ const userSlice = createSlice({
       }),
 });
 
+export const { toggleSidebar } = userSlice.actions;
 export default userSlice.reducer;
