@@ -2,10 +2,14 @@ import { toast } from "react-toastify";
 import { IUserState } from "./../interfaces/user";
 import { createSlice } from "@reduxjs/toolkit";
 import { registerUser, loginUser } from "../actions/user";
+import {
+  getUserFromLocalStorage,
+  addUserToLocalStorage,
+} from "../utils/localStorage";
 
 const initialState: IUserState = {
   isLoading: false,
-  user: null,
+  user: getUserFromLocalStorage(),
 };
 
 const userSlice = createSlice({
@@ -14,29 +18,30 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
-      // login
+      // register
       .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(registerUser.fulfilled, (state, { payload }) => {
         const { user } = payload;
-        console.log(payload);
         state.isLoading = false;
         state.user = user;
+        addUserToLocalStorage(user);
         toast.success(`Hello There ${user.name}`);
       })
       .addCase(registerUser.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
       })
+      // login
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(loginUser.fulfilled, (state, { payload }) => {
         const { user } = payload;
-        console.log(payload);
         state.isLoading = false;
         state.user = user;
+        addUserToLocalStorage(user);
         toast.success(`Wellcom Back ${user.name}`);
       })
       .addCase(loginUser.rejected, (state, { payload }) => {

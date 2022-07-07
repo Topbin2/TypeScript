@@ -1,4 +1,11 @@
-import { useState, FormEvent, useCallback, ChangeEvent } from "react";
+import {
+  useState,
+  FormEvent,
+  useCallback,
+  ChangeEvent,
+  useEffect,
+} from "react";
+import { useNavigate } from "react-router";
 
 import { Logo, FormRow } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
@@ -22,9 +29,18 @@ const initialState = {
 
 const Register = () => {
   const [values, setValues] = useState<IState>(initialState);
-
   const { user, isLoading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(123);
+    if (user) {
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
+  }, [user, navigate]);
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {

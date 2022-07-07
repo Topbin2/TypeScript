@@ -10,14 +10,14 @@ export const registerUser = createAsyncThunk<
   User,
   UserState,
   {
-    rejectValue: any;
+    rejectValue: string;
   }
->("user/registerUser", async (user, thunkAPI) => {
+>("user/registerUser", async (user, { rejectWithValue }) => {
   try {
     const response = await customFetch.post("/auth/register", user);
     return response.data;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return rejectWithValue(error.response.data.msg);
   }
 });
 
@@ -27,12 +27,11 @@ export const loginUser = createAsyncThunk<
   {
     rejectValue: string;
   }
->("user/loginUser", async (user, thunkAPI) => {
+>("user/loginUser", async (user, { rejectWithValue }) => {
   try {
     const response = await customFetch.post("/auth/login", user);
     return response.data;
   } catch (error) {
-    console.log(error);
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return rejectWithValue(error.response.data.msg);
   }
 });
