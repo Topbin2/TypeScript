@@ -5,7 +5,7 @@ export interface CartState {
   isLoading: boolean;
 }
 
-interface CartItem {
+export interface CartItem {
   id: string;
   title: string;
   price: string;

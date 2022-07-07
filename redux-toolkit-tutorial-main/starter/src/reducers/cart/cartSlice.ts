@@ -1,6 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-
-import { CartState } from "./../../interfaces/cart";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { CartState, CartItem } from "./../../interfaces/cart";
 import { getCartItems } from "../../actions/cart";
 
 const initialState: CartState = {
@@ -17,16 +16,17 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.cartItems = [];
     },
-    removeItem: (state, action) => {
+    removeItem: (state, action: PayloadAction<string>) => {
+      console.log(action);
       state.cartItems = state.cartItems.filter(
         (item) => item.id !== action.payload
       );
     },
-    increase: (state, action) => {
+    increase: (state, action: PayloadAction<string>) => {
       const item = state.cartItems.find((item) => item.id === action.payload);
       item && item.amount++;
     },
-    decrease: (state, action) => {
+    decrease: (state, action: PayloadAction<string>) => {
       const item = state.cartItems.find((item) => item.id === action.payload);
       item && item.amount--;
     },
@@ -46,7 +46,7 @@ const cartSlice = createSlice({
       .addCase(getCartItems.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getCartItems.fulfilled, (state, action) => {
+      .addCase(getCartItems.fulfilled, (state, action: PayloadAction<CartItem[]>) => {
         state.isLoading = false;
         state.cartItems = action.payload;
       })

@@ -7,6 +7,7 @@ export const store = configureStore({
     cart: cartReducer,
     modal: modalReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

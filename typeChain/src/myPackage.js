@@ -1,4 +1,3 @@
-// @ts-check
 
 export function init(config) {
   return true;
