@@ -1,9 +1,10 @@
+import Wrapper from "../assets/wrappers/Navbar";
 
 const Navbar = () => {
   return (
-    <h1>
-      Navbar
-    </h1>
+    <Wrapper>
+      <h2>Navbar</h2>
+    </Wrapper>
   );
 };
 
