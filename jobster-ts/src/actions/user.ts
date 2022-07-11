@@ -1,9 +1,17 @@
 import { UserState, UserInfo } from "./../interfaces/user";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import customFetch from "../utils/axios";
+import { IUserState } from "../interfaces/user";
 
 interface User {
   user: UserInfo;
+}
+
+interface IUserData {
+  name: string;
+  email: string;
+  lastName: string;
+  location: string;
 }
 
 export const registerUser = createAsyncThunk<
@@ -33,5 +41,27 @@ export const loginUser = createAsyncThunk<
     return response.data;
   } catch (error) {
     return rejectWithValue(error.response.data.msg);
+  }
+});
+
+export const updateUser = createAsyncThunk<
+  User,
+  IUserData,
+  {
+    rejectValue: string;
+    state: IUserState;
+  }
+>("user/updateUser", async (user, thunkAPI) => {
+  try {
+    const state = thunkAPI.getState();
+    const response = await customFetch.patch("/auth/updateUser", user, {
+      headers: {
+        authorization: `Bearer ${state.user?.token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error.response);
+    return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 });

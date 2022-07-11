@@ -1,11 +1,11 @@
 import { toast } from "react-toastify";
 import { IUserState } from "./../interfaces/user";
 import { createSlice } from "@reduxjs/toolkit";
-import { registerUser, loginUser } from "../actions/user";
+import { registerUser, loginUser, updateUser } from "../actions/user";
 import {
   getUserFromLocalStorage,
   addUserToLocalStorage,
-  removeUserFromLocalStorage
+  removeUserFromLocalStorage,
 } from "../utils/localStorage";
 
 const initialState: IUserState = {
@@ -25,7 +25,7 @@ const userSlice = createSlice({
       state.user = null;
       state.isSidebarOpen = false;
       removeUserFromLocalStorage();
-    }
+    },
   },
   extraReducers: (builder) =>
     builder
@@ -53,9 +53,24 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.user = user;
         addUserToLocalStorage(user);
-        toast.success(`Wellcom Back ${user.name}`);
+        toast.success(`Welcome Back ${user.name}`);
       })
       .addCase(loginUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(payload);
+      })
+      // update user information
+      .addCase(updateUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, { payload }) => {
+        const { user } = payload;
+        state.isLoading = false;
+        state.user = user;
+        addUserToLocalStorage(user);
+        toast.success(`Welcome Back ${user.name}`);
+      })
+      .addCase(updateUser.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
       }),
