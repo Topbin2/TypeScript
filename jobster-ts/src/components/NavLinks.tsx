@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import links from "../utils/links";
 
 interface IProps {
-  toggleSidebar: () => void;
+  toggleSidebar?: () => void;
 }
 
 const NavLinks: React.FC<IProps> = ({ toggleSidebar }) => {
