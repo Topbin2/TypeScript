@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../hooks";
 
-const ProtectedRoute: React.FC<any> = ({ children }) => {
+const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const { user } = useAppSelector((state) => state.user);
   if (!user) {
     return <Navigate to="/landing" />;
