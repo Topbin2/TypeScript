@@ -2,6 +2,7 @@ import { UserState, UserInfo } from "./../interfaces/user";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import customFetch from "../utils/axios";
 import { IUserState } from "../interfaces/user";
+import { RootState } from "../store/store";
 
 interface User {
   user: UserInfo;
@@ -44,24 +45,27 @@ export const loginUser = createAsyncThunk<
   }
 });
 
+interface RootReducer {
+  user: IUserState;
+}
+
 export const updateUser = createAsyncThunk<
   User,
   IUserData,
   {
     rejectValue: string;
-    state: IUserState;
+    state: RootReducer;
   }
 >("user/updateUser", async (user, thunkAPI) => {
   try {
     const state = thunkAPI.getState();
     const response = await customFetch.patch("/auth/updateUser", user, {
       headers: {
-        authorization: `Bearer ${state.user?.token}`,
+        authorization: `Bearer ${state.user?.user?.token}`,
       },
     });
     return response.data;
   } catch (error) {
-    console.log(error.response);
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 });

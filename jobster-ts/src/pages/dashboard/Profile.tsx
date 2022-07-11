@@ -4,6 +4,7 @@ import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { toast } from "react-toastify";
 import { useCallback } from "react";
+import { updateUser } from "../../actions/user";
 
 interface IUserData {
   name: string;
@@ -31,8 +32,9 @@ const Profile = () => {
         toast.error("please fill out all fields");
         return;
       }
+      dispatch(updateUser(userData));
     },
-    [userData]
+    [userData, dispatch]
   );
 
   const handleChange = useCallback(
