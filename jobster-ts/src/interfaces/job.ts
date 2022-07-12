@@ -8,7 +8,7 @@ export interface JobState {
   company: string;
   jobLocation: string;
   jobTypeOptions: Array<JobType>;
-  jopType: JobType;
+  jobType: JobType;
   statusOptions: Array<StatusType>;
   status: StatusType;
   isEditing: boolean;
