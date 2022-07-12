@@ -1,8 +1,8 @@
 import { UserState, UserInfo } from "../interfaces/user";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import customFetch from "../utils/axios";
-import { IUserState } from "../interfaces/user";
 import { logoutUser } from "../reducers/userSlice";
+import { CreateAsyncThunkTypes } from "../store/store";
 
 interface User {
   user: UserInfo;
@@ -18,9 +18,7 @@ interface IUserData {
 export const registerUser = createAsyncThunk<
   User,
   UserState,
-  {
-    rejectValue: string;
-  }
+  CreateAsyncThunkTypes
 >("user/registerUser", async (user, { rejectWithValue }) => {
   try {
     const response = await customFetch.post("/auth/register", user);
@@ -33,9 +31,7 @@ export const registerUser = createAsyncThunk<
 export const loginUser = createAsyncThunk<
   User,
   UserState,
-  {
-    rejectValue: string;
-  }
+  CreateAsyncThunkTypes
 >("user/loginUser", async (user, { rejectWithValue }) => {
   try {
     const response = await customFetch.post("/auth/login", user);
@@ -48,10 +44,7 @@ export const loginUser = createAsyncThunk<
 export const updateUser = createAsyncThunk<
   User,
   IUserData,
-  {
-    rejectValue: string;
-    state: { user: IUserState };
-  }
+  CreateAsyncThunkTypes
 >("user/updateUser", async (user, thunkAPI) => {
   try {
     const state = thunkAPI.getState();
@@ -60,7 +53,6 @@ export const updateUser = createAsyncThunk<
         authorization: `Bearer ${state.user?.user?.token}`,
       },
     });
-    console.log(response.data);
     return response.data;
   } catch (error: any) {
     if (error.response.status === 401) {
