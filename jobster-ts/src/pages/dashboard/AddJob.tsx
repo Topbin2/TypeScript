@@ -1,8 +1,10 @@
 import { FormRow, FormRowSelect } from "../../components";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
-import {  useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { toast } from "react-toastify";
 import { ChangeEvent, FormEvent, useCallback } from "react";
+import { handleChange, clearValues } from "../../reducers/jobSlice";
+import { FormName } from "../../interfaces/job";
 
 const AddJob = () => {
   const {
@@ -17,6 +19,7 @@ const AddJob = () => {
     isEditing,
     editJobId,
   } = useAppSelector((state) => state.job);
+  const dispatch = useAppDispatch();
 
   const handleSubmit = useCallback(
     (e: FormEvent<HTMLButtonElement>) => {
@@ -31,11 +34,11 @@ const AddJob = () => {
 
   const handleJobInput = useCallback(
     (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-      const name = e.target.name;
+      const name = e.target.name as FormName;
       const value = e.target.value;
-      console.log(name, value);
+      dispatch(handleChange({ name, value }));
     },
-    []
+    [dispatch]
   );
 
   return (
@@ -83,7 +86,7 @@ const AddJob = () => {
             <button
               type="button"
               className="btn btn-block clear-btn"
-              onClick={() => console.log("clear values")}
+              onClick={() => dispatch(clearValues())}
             >
               clear
             </button>

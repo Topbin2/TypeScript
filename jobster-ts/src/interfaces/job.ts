@@ -2,8 +2,15 @@ export type JobType = "full-time" | "part-time" | "remote" | "internship";
 
 export type StatusType = "interview" | "declined" | "pending";
 
+export type FormName =
+  | "position"
+  | "company"
+  | "jobType"
+  | "jobLocation"
+  | "status";
+
 export interface FormPayload {
-  name: "position" | "company" | "jobType" | "jobLocation" | "status";
+  name: FormName;
   value: string;
 }
 

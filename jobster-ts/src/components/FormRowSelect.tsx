@@ -8,7 +8,13 @@ interface IProps {
   list: Array<string>;
 }
 
-const FormRowSelect = ({ labelText, name, value, handleChange, list }: IProps) => {
+const FormRowSelect = ({
+  labelText,
+  name,
+  value,
+  handleChange,
+  list,
+}: IProps) => {
   return (
     <div className="form-row">
       <label htmlFor={name} className="form-label">
