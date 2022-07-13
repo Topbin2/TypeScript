@@ -3,7 +3,7 @@ import { ChangeEvent } from "react";
 interface IProps {
   type: string;
   name: string;
-  value: string;
+  value: string | undefined;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   labelText?: string;
 }

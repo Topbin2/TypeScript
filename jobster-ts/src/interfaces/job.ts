@@ -25,15 +25,15 @@ export interface CreateJobBody {
 export interface CreateJobResponse {
   job: {
     company: string;
-    createdAt: string;
-    createdBy: string;
-    jobLocation: string;
-    jobType: string;
     position: string;
     status: string;
-    updatedAt: string;
-    __v: number;
+    jobType: string;
+    jobLocation: string;
+    createdBy: string;
     _id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    __v: number;
   };
 }
 
@@ -41,7 +41,7 @@ export interface JobState {
   isLoading: boolean;
   position: string;
   company: string;
-  jobLocation: string;
+  jobLocation: string | undefined;
   jobTypeOptions: Array<JobType>;
   jobType: string;
   statusOptions: Array<StatusType>;

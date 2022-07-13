@@ -2,7 +2,7 @@ import { FormRow, FormRowSelect } from "../../components";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { toast } from "react-toastify";
-import { ChangeEvent, FormEvent, useCallback } from "react";
+import { ChangeEvent, FormEvent, useCallback, useEffect } from "react";
 import { handleChange, clearValues } from "../../reducers/jobSlice";
 import { FormName } from "../../interfaces/job";
 import { createJob } from "../../actions/job";
@@ -20,7 +20,14 @@ const AddJob = () => {
     isEditing,
     editJobId,
   } = useAppSelector((state) => state.job);
+  const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (user) {
+      dispatch(handleChange({ name: "jobLocation", value: user.location }));
+    }
+  }, [dispatch, user]);
 
   const handleSubmit = useCallback(
     (e: FormEvent<HTMLButtonElement>) => {

@@ -27,8 +27,11 @@ const jobSlice = createSlice({
       const { name, value } = payload;
       state[name] = value;
     },
-    clearValues: () => {
-      return initialState;
+    clearValues: (): JobState => {
+      return {
+        ...initialState,
+        jobLocation: getUserFromLocalStorage()?.location || "",
+      };
     },
   },
   extraReducers: (builder) =>
