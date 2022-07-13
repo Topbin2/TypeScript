@@ -14,6 +14,10 @@ export interface FormPayload {
   value: string;
 }
 
+// export interface CreateJobBody {
+//   [FormName] : string;
+// }
+
 export interface JobState {
   isLoading: boolean;
   position: string;

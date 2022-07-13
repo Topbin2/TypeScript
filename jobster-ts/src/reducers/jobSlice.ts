@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import customFetch from "../utils/axios";
 import { getUserFromLocalStorage } from "../utils/localStorage";
 import { JobState, FormPayload } from "./../interfaces/job";
+import { createJob } from "../actions/job";
 
 const initialState: JobState = {
   isLoading: false,
@@ -30,6 +31,20 @@ const jobSlice = createSlice({
       return initialState;
     },
   },
+  extraReducers: (builder) =>
+    builder
+      //createJob
+      .addCase(createJob.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createJob.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        toast.success("Job Created");
+      })
+      .addCase(createJob.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(payload);
+      }),
 });
 
 export const { handleChange, clearValues } = jobSlice.actions;

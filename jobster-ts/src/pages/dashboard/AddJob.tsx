@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { ChangeEvent, FormEvent, useCallback } from "react";
 import { handleChange, clearValues } from "../../reducers/jobSlice";
 import { FormName } from "../../interfaces/job";
+import { createJob } from "../../actions/job";
 
 const AddJob = () => {
   const {
@@ -28,8 +29,9 @@ const AddJob = () => {
         toast.error("Please fill out all fields");
         return;
       }
+      dispatch(createJob({ position, company, jobLocation, jobType, status }));
     },
-    [position, company, jobLocation]
+    [position, company, jobLocation, jobType, status, dispatch]
   );
 
   const handleJobInput = useCallback(
