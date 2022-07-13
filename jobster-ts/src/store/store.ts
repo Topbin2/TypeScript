@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import user from "../reducers/userSlice";
 import job from "../reducers/jobSlice";
+import allJobs from "../reducers/allJobsSlice";
 
 const store = configureStore({
   reducer: {
     user,
     job,
+    allJobs,
   },
 });
 
