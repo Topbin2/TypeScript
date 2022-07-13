@@ -14,9 +14,28 @@ export interface FormPayload {
   value: string;
 }
 
-// export interface CreateJobBody {
-//   [FormName] : string;
-// }
+export interface CreateJobBody {
+  position: string;
+  company: string;
+  jobType: string;
+  jobLocation: string;
+  status: string;
+}
+
+export interface CreateJobResponse {
+  job: {
+    company: string;
+    createdAt: string;
+    createdBy: string;
+    jobLocation: string;
+    jobType: string;
+    position: string;
+    status: string;
+    updatedAt: string;
+    __v: number;
+    _id: string;
+  };
+}
 
 export interface JobState {
   isLoading: boolean;

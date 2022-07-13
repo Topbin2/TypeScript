@@ -37,7 +37,7 @@ const jobSlice = createSlice({
       .addCase(createJob.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createJob.fulfilled, (state, { payload }) => {
+      .addCase(createJob.fulfilled, (state) => {
         state.isLoading = false;
         toast.success("Job Created");
       })
