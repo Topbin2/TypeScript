@@ -29,11 +29,14 @@ const AddJob = () => {
     [position, company, jobLocation]
   );
 
-  const handleJobInput = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    console.log(name, value);
-  }, []);
+  const handleJobInput = useCallback(
+    (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      const name = e.target.name;
+      const value = e.target.value;
+      console.log(name, value);
+    },
+    []
+  );
 
   return (
     <Wrapper>
@@ -62,6 +65,7 @@ const AddJob = () => {
             value={jobLocation}
             handleChange={handleJobInput}
           />
+          {/* status */}
           <div className="btn-container">
             <button
               type="button"
