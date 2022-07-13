@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { IUserState } from "./../interfaces/user";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { registerUser, loginUser, updateUser } from "../actions/user";
 import {
   getUserFromLocalStorage,
@@ -21,10 +21,13 @@ const userSlice = createSlice({
     toggleSidebar: (state) => {
       state.isSidebarOpen = !state.isSidebarOpen;
     },
-    logoutUser: (state) => {
+    logoutUser: (state, { payload }: PayloadAction<string | undefined>) => {
       state.user = null;
       state.isSidebarOpen = false;
       removeUserFromLocalStorage();
+      if (payload) {
+        toast.success(payload);
+      }
     },
   },
   extraReducers: (builder) =>
