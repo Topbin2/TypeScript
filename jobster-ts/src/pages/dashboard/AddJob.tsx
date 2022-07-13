@@ -1,6 +1,6 @@
-import { FormRow } from "../../components";
+import { FormRow, FormRowSelect } from "../../components";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import {  useAppSelector } from "../../hooks";
 import { toast } from "react-toastify";
 import { ChangeEvent, FormEvent, useCallback } from "react";
 
@@ -66,6 +66,19 @@ const AddJob = () => {
             handleChange={handleJobInput}
           />
           {/* status */}
+          <FormRowSelect
+            name="status"
+            value={status}
+            handleChange={handleJobInput}
+            list={statusOptions}
+          />
+          <FormRowSelect
+            name="jobType"
+            labelText="job type"
+            value={jobType}
+            handleChange={handleJobInput}
+            list={jobTypeOptions}
+          />
           <div className="btn-container">
             <button
               type="button"

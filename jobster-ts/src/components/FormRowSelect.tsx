@@ -1,8 +1,10 @@
+import { ChangeEvent } from "react";
+
 interface IProps {
-  labelText: string;
+  labelText?: string;
   name: string;
   value: string;
-  handleChange: () => void;
+  handleChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   list: Array<string>;
 }
 
