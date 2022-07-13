@@ -20,7 +20,7 @@ export const createJob = createAsyncThunk<
     return response.data;
   } catch (error: any) {
     if (error.response.status === 401) {
-      thunkAPI.dispatch(logoutUser);
+      thunkAPI.dispatch(logoutUser());
       return thunkAPI.rejectWithValue("Unauthorized! Logging Out...");
     }
     thunkAPI.rejectWithValue(error.response.data.msg);
