@@ -27,7 +27,7 @@ const initialFilteredState: AllJobsFilteredState = {
 };
 
 const initialState: AllJobsState = {
-  isLoading: false,
+  isLoading: true,
   jobs: [],
   totalJobs: 0,
   numOfPages: 1,
