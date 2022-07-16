@@ -3,10 +3,15 @@ import { useEffect } from "react";
 import Wrapper from "../assets/wrappers/JobsContainer";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { Job, Loading } from "../components";
+import { getAllJobs } from "../actions/allJobs";
 
 const JobsContainer = () => {
   const { jobs, isLoading } = useAppSelector((state) => state.allJobs);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getAllJobs());
+  }, [dispatch]);
 
   if (isLoading) {
     return <Loading center={true} />;

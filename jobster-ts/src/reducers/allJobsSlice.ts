@@ -1,22 +1,8 @@
+import { toast } from "react-toastify";
 import { createSlice } from "@reduxjs/toolkit";
 
-interface AllJobsFilteredState {
-  search: string;
-  searchStatus: string;
-  searchType: string;
-  sort: string;
-  sortOptions: Array<string>;
-}
-
-interface AllJobsState extends AllJobsFilteredState {
-  isLoading: boolean;
-  jobs: Array<any>;
-  totalJobs: number;
-  numOfPages: number;
-  page: number;
-  status: Object;
-  monthlyApplications: Array<any>;
-}
+import { getAllJobs } from "./../actions/allJobs";
+import { AllJobsFilteredState, AllJobsState } from "./../interfaces/allJobs";
 
 const initialFilteredState: AllJobsFilteredState = {
   search: "",
@@ -27,7 +13,7 @@ const initialFilteredState: AllJobsFilteredState = {
 };
 
 const initialState: AllJobsState = {
-  isLoading: true,
+  isLoading: false,
   jobs: [],
   totalJobs: 0,
   numOfPages: 1,
@@ -41,6 +27,20 @@ const allJobsSlice = createSlice({
   name: "allJobs",
   initialState,
   reducers: {},
+  extraReducers: (builder) =>
+    builder
+      //getAllJobs
+      .addCase(getAllJobs.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllJobs.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.jobs = payload.jobs;
+      })
+      .addCase(getAllJobs.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(payload);
+      }),
 });
 
 export default allJobsSlice.reducer;
