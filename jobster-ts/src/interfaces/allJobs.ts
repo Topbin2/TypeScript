@@ -8,7 +8,7 @@ export interface AllJobsFilteredState {
 
 export interface AllJobsState extends AllJobsFilteredState {
   isLoading: boolean;
-  jobs: Array<any>;
+  jobs: Array<JobType>;
   totalJobs: number;
   numOfPages: number;
   page: number;
@@ -17,12 +17,12 @@ export interface AllJobsState extends AllJobsFilteredState {
 }
 
 export interface AllJobsGetResType {
-  jobs: Job[];
+  jobs: JobType[];
   totalJobs: number;
   numOfPages: number;
 }
 
-export interface Job {
+export interface JobType {
   _id: string;
   company: string;
   position: string;
