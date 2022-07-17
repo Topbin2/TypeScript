@@ -4,6 +4,7 @@ import Wrapper from "../assets/wrappers/Job";
 import { useAppDispatch } from "../hooks";
 import { JobType } from "../interfaces/allJobs";
 import { JobInfo } from "./index";
+import moment from "moment";
 
 const Job: React.FC<JobType> = ({
   _id,
@@ -16,7 +17,7 @@ const Job: React.FC<JobType> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const date = createdAt;
+  const date = moment(createdAt).format("MMM Do, YYYY");
 
   return (
     <Wrapper>
