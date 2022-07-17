@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Job";
 import { useAppDispatch } from "../hooks";
 import { JobType } from "../interfaces/allJobs";
+import { JobInfo } from "./index";
 
 const Job: React.FC<JobType> = ({
   _id,
@@ -14,6 +15,9 @@ const Job: React.FC<JobType> = ({
   status,
 }) => {
   const dispatch = useAppDispatch();
+
+  const date = createdAt;
+
   return (
     <Wrapper>
       <header>
@@ -25,7 +29,9 @@ const Job: React.FC<JobType> = ({
       </header>
       <div className="content">
         <div className="content-center">
-          <h4>more content</h4>
+          <JobInfo icon={<FaLocationArrow />} text={jobLocation} />
+          <JobInfo icon={<FaCalendarAlt />} text={date} />
+          <JobInfo icon={<FaBriefcase />} text={jobType} />
           <div className={`status ${status}`}>{status}</div>
         </div>
         <footer>
