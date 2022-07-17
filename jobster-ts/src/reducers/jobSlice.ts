@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { getUserFromLocalStorage } from "../utils/localStorage";
 import { JobState, FormPayload } from "./../interfaces/job";
 import { createJob } from "../actions/job";
+import { getAllJobs } from "./../actions/allJobs";
+import { showLoading, hideLoading } from "./allJobsSlice";
 
 const initialState: JobState = {
   isLoading: false,

@@ -26,7 +26,14 @@ const initialState: AllJobsState = {
 const allJobsSlice = createSlice({
   name: "allJobs",
   initialState,
-  reducers: {},
+  reducers: {
+    showLoading: (state) => {
+      state.isLoading = true;
+    },
+    hideLoading: (state) => {
+      state.isLoading = false;
+    },
+  },
   extraReducers: (builder) =>
     builder
       //getAllJobs
@@ -42,5 +49,7 @@ const allJobsSlice = createSlice({
         toast.error(payload);
       }),
 });
+
+export const { showLoading, hideLoading } = allJobsSlice.actions;
 
 export default allJobsSlice.reducer;
