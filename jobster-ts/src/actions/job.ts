@@ -4,6 +4,7 @@ import customFetch from "../utils/axios";
 import { clearValues } from "../reducers/jobSlice";
 import { logoutUser } from "../reducers/userSlice";
 import { CreateJobBody, CreateJobResponse } from "../interfaces/job";
+import { hideLoading, showLoading } from "../reducers/allJobsSlice";
 
 export const createJob = createAsyncThunk<
   CreateJobResponse,
@@ -26,3 +27,22 @@ export const createJob = createAsyncThunk<
     thunkAPI.rejectWithValue(error.response.data.msg);
   }
 });
+
+export const deleteJob = createAsyncThunk<any, string, CreateAsyncThunkTypes>(
+  "job/deleteJob",
+  async (jobId, thunkAPI) => {
+    thunkAPI.dispatch(showLoading());
+    console.log(jobId);
+    // try {
+    //   const response = await customFetch.delete(`jobs/${jobId}`, {
+    //     headers: {
+    //       authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
+    //     },
+    //   });
+    //   return response.data;
+    // } catch (error: any) {
+    //   thunkAPI.dispatch(hideLoading());
+    //   return thunkAPI.rejectWithValue(error.response.data.msg);
+    // }
+  }
+);
