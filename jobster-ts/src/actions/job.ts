@@ -1,3 +1,4 @@
+import { getAllJobs } from "./allJobs";
 import { CreateAsyncThunkTypes } from "./../store/store";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import customFetch from "../utils/axios";
@@ -28,21 +29,22 @@ export const createJob = createAsyncThunk<
   }
 });
 
-export const deleteJob = createAsyncThunk<any, string, CreateAsyncThunkTypes>(
-  "job/deleteJob",
-  async (jobId, thunkAPI) => {
-    thunkAPI.dispatch(showLoading());
-    console.log(jobId);
-    // try {
-    //   const response = await customFetch.delete(`jobs/${jobId}`, {
-    //     headers: {
-    //       authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
-    //     },
-    //   });
-    //   return response.data;
-    // } catch (error: any) {
-    //   thunkAPI.dispatch(hideLoading());
-    //   return thunkAPI.rejectWithValue(error.response.data.msg);
-    // }
+export const deleteJob = createAsyncThunk<
+  { msg: string },
+  string,
+  CreateAsyncThunkTypes
+>("job/deleteJob", async (jobId, thunkAPI) => {
+  thunkAPI.dispatch(showLoading());
+  try {
+    const response = await customFetch.delete(`jobs/${jobId}`, {
+      headers: {
+        authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
+      },
+    });
+    thunkAPI.dispatch(getAllJobs());
+    return response.data;
+  } catch (error: any) {
+    thunkAPI.dispatch(hideLoading());
+    return thunkAPI.rejectWithValue(error.response.data.msg);
   }
-);
+});
