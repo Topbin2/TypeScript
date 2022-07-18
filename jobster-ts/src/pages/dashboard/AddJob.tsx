@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { ChangeEvent, FormEvent, useCallback, useEffect } from "react";
 import { handleChange, clearValues } from "../../reducers/jobSlice";
 import { FormName } from "../../interfaces/job";
-import { createJob } from "../../actions/job";
+import { createJob, editJob } from "../../actions/job";
 
 const AddJob = () => {
   const {
