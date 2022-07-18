@@ -30,7 +30,7 @@ export const createJob = createAsyncThunk<
 });
 
 export const deleteJob = createAsyncThunk<
-  { msg: string },
+  string,
   string,
   CreateAsyncThunkTypes
 >("job/deleteJob", async (jobId, thunkAPI) => {
@@ -42,7 +42,7 @@ export const deleteJob = createAsyncThunk<
       },
     });
     thunkAPI.dispatch(getAllJobs());
-    return response.data;
+    return response.data.msg;
   } catch (error: any) {
     thunkAPI.dispatch(hideLoading());
     return thunkAPI.rejectWithValue(error.response.data.msg);

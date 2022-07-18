@@ -49,3 +49,7 @@ export interface JobState {
   isEditing: boolean;
   editJobId: string;
 }
+
+export interface SetEditJobPayload extends CreateJobBody {
+  editJobId: string;
+}

@@ -6,6 +6,7 @@ import { JobType } from "../interfaces/allJobs";
 import { JobInfo } from "./index";
 import moment from "moment";
 import { deleteJob } from "../actions/job";
+import { setEditJob } from "../reducers/jobSlice";
 
 const Job: React.FC<JobType> = ({
   _id,
@@ -41,7 +42,18 @@ const Job: React.FC<JobType> = ({
             <Link
               to="/add-job"
               className="btn edit-btn"
-              onClick={() => console.log("edit-job")}
+              onClick={() =>
+                dispatch(
+                  setEditJob({
+                    editJobId: _id,
+                    position,
+                    company,
+                    jobLocation,
+                    jobType,
+                    status,
+                  })
+                )
+              }
             >
               Edit
             </Link>
