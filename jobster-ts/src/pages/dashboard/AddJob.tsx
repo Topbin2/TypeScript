@@ -36,9 +36,18 @@ const AddJob = () => {
         toast.error("Please fill out all fields");
         return;
       }
+      if (isEditing) {
+        dispatch(
+          editJob({
+            jobId: editJobId,
+            job: { position, company, jobLocation, jobType, status },
+          })
+        );
+        return;
+      }
       dispatch(createJob({ position, company, jobLocation, jobType, status }));
     },
-    [position, company, jobLocation, jobType, status, dispatch]
+    [position, company, jobLocation, jobType, status, editJobId, isEditing ,dispatch]
   );
 
   const handleJobInput = useCallback(

@@ -4,8 +4,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import customFetch from "../utils/axios";
 import { clearValues } from "../reducers/jobSlice";
 import { logoutUser } from "../reducers/userSlice";
-import { CreateJobBody, CreateJobResponse } from "../interfaces/job";
+import {
+  CreateJobBody,
+  CreateJobResponse,
+  EditJobActionPayload,
+  EditJobResponse,
+} from "../interfaces";
 import { hideLoading, showLoading } from "../reducers/allJobsSlice";
+import { authHeader } from "../utils/axios";
 
 export const createJob = createAsyncThunk<
   CreateJobResponse,
@@ -13,11 +19,7 @@ export const createJob = createAsyncThunk<
   CreateAsyncThunkTypes
 >("job/createJob", async (job, thunkAPI) => {
   try {
-    const response = await customFetch.post("/jobs", job, {
-      headers: {
-        authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
-      },
-    });
+    const response = await customFetch.post("/jobs", job, authHeader(thunkAPI));
     thunkAPI.dispatch(clearValues());
     return response.data;
   } catch (error: any) {
@@ -29,22 +31,23 @@ export const createJob = createAsyncThunk<
   }
 });
 
-export const editJob = createAsyncThunk<any, any, CreateAsyncThunkTypes>(
-  "job/editJob",
-  async ({ jobId, job }, thunkAPI) => {
-    try {
-      const response = await customFetch.patch(`/jobs/${jobId}`, job, {
-        headers: {
-          authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
-        },
-      });
-      thunkAPI.dispatch(clearValues());
-      return response.data;
-    } catch (error: any) {
-      thunkAPI.rejectWithValue(error.response.data.msg);
-    }
+export const editJob = createAsyncThunk<
+  EditJobResponse,
+  EditJobActionPayload,
+  CreateAsyncThunkTypes
+>("job/editJob", async ({ jobId, job }, thunkAPI) => {
+  try {
+    const response = await customFetch.patch(
+      `/jobs/${jobId}`,
+      job,
+      authHeader(thunkAPI)
+    );
+    thunkAPI.dispatch(clearValues());
+    return response.data;
+  } catch (error: any) {
+    thunkAPI.rejectWithValue(error.response.data.msg);
   }
-);
+});
 
 export const deleteJob = createAsyncThunk<
   string,
@@ -53,11 +56,10 @@ export const deleteJob = createAsyncThunk<
 >("job/deleteJob", async (jobId, thunkAPI) => {
   thunkAPI.dispatch(showLoading());
   try {
-    const response = await customFetch.delete(`jobs/${jobId}`, {
-      headers: {
-        authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
-      },
-    });
+    const response = await customFetch.delete(
+      `jobs/${jobId}`,
+      authHeader(thunkAPI)
+    );
     thunkAPI.dispatch(getAllJobs());
     return response.data.msg;
   } catch (error: any) {

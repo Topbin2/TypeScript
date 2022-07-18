@@ -1,4 +1,4 @@
-export type JobType = "full-time" | "part-time" | "remote" | "internship";
+export type JobText = "full-time" | "part-time" | "remote" | "internship";
 
 export type StatusType = "interview" | "declined" | "pending";
 
@@ -22,19 +22,21 @@ export interface CreateJobBody {
   status: string;
 }
 
+export interface JobResponse {
+  company: string;
+  position: string;
+  status: string;
+  jobType: string;
+  jobLocation: string;
+  createdBy: string;
+  _id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+}
+
 export interface CreateJobResponse {
-  job: {
-    company: string;
-    position: string;
-    status: string;
-    jobType: string;
-    jobLocation: string;
-    createdBy: string;
-    _id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    __v: number;
-  };
+  job: JobResponse;
 }
 
 export interface JobState {
@@ -42,7 +44,7 @@ export interface JobState {
   position: string;
   company: string;
   jobLocation: string | undefined;
-  jobTypeOptions: Array<JobType>;
+  jobTypeOptions: Array<JobText>;
   jobType: string;
   statusOptions: Array<StatusType>;
   status: string;
@@ -52,4 +54,13 @@ export interface JobState {
 
 export interface SetEditJobPayload extends CreateJobBody {
   editJobId: string;
+}
+
+export interface EditJobActionPayload {
+  jobId: string;
+  job: CreateJobBody;
+}
+
+export interface EditJobResponse {
+  updatedJob: JobResponse;
 }
