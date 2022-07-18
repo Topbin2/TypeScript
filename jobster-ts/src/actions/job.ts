@@ -29,6 +29,23 @@ export const createJob = createAsyncThunk<
   }
 });
 
+export const editJob = createAsyncThunk<any, any, CreateAsyncThunkTypes>(
+  "job/editJob",
+  async ({ jobId, job }, thunkAPI) => {
+    try {
+      const response = await customFetch.patch(`/jobs/${jobId}`, job, {
+        headers: {
+          authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
+        },
+      });
+      thunkAPI.dispatch(clearValues());
+      return response.data;
+    } catch (error: any) {
+      thunkAPI.rejectWithValue(error.response.data.msg);
+    }
+  }
+);
+
 export const deleteJob = createAsyncThunk<
   string,
   string,

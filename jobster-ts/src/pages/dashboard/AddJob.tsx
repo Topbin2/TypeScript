@@ -24,10 +24,10 @@ const AddJob = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (user) {
+    if (!isEditing && user) {
       dispatch(handleChange({ name: "jobLocation", value: user.location }));
     }
-  }, [dispatch, user]);
+  }, [dispatch, isEditing, user]);
 
   const handleSubmit = useCallback(
     (e: FormEvent<HTMLButtonElement>) => {
@@ -68,7 +68,7 @@ const AddJob = () => {
             name="company"
             value={company}
             handleChange={handleJobInput}
-          />{" "}
+          />
           {/* jobLocation */}
           <FormRow
             type="text"
