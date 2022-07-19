@@ -12,8 +12,8 @@ export interface AllJobsState extends AllJobsFilteredState {
   totalJobs: number;
   numOfPages: number;
   page: number;
-  status: Object;
-  monthlyApplications: Array<any>;
+  stats: DefaultStats;
+  monthlyApplications: Array<MonthlyApplication>;
 }
 
 export interface AllJobsGetResType {
@@ -33,4 +33,20 @@ export interface JobType {
   createdAt: Date;
   updatedAt: Date;
   __v: number;
+}
+
+export interface showStatsResponse {
+  defaultStats: DefaultStats;
+  monthlyApplications: MonthlyApplication[];
+}
+
+export interface DefaultStats {
+  pending: number | null;
+  interview: number | null;
+  declined: number | null;
+}
+
+export interface MonthlyApplication {
+  date: string;
+  count: number;
 }

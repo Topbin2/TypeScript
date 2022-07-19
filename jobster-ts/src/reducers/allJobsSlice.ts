@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getAllJobs } from "./../actions/allJobs";
+import { getAllJobs, showStats } from "./../actions/allJobs";
 import { AllJobsFilteredState, AllJobsState } from "./../interfaces/allJobs";
 
 const initialFilteredState: AllJobsFilteredState = {
@@ -18,7 +18,7 @@ const initialState: AllJobsState = {
   totalJobs: 0,
   numOfPages: 1,
   page: 1,
-  status: {},
+  stats: { pending: null, interview: null, declined: null },
   monthlyApplications: [],
   ...initialFilteredState,
 };
@@ -45,6 +45,18 @@ const allJobsSlice = createSlice({
         state.jobs = payload.jobs;
       })
       .addCase(getAllJobs.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(payload);
+      })
+      .addCase(showStats.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(showStats.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.stats = payload.defaultStats;
+        state.monthlyApplications = payload.monthlyApplications;
+      })
+      .addCase(showStats.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
       }),
