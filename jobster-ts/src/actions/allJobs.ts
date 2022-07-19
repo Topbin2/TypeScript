@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
 import { CreateAsyncThunkTypes } from "../store/store";
 import { AllJobsGetResType } from "../interfaces/allJobs";
 import { authHeader, customFetch } from "../utils";
