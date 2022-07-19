@@ -1,7 +1,6 @@
 import { getAllJobs } from "./allJobs";
 import { CreateAsyncThunkTypes } from "./../store/store";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import customFetch from "../utils/axios";
 import { clearValues } from "../reducers/jobSlice";
 import { logoutUser } from "../reducers/userSlice";
 import {
@@ -11,7 +10,7 @@ import {
   EditJobResponse,
 } from "../interfaces";
 import { hideLoading, showLoading } from "../reducers/allJobsSlice";
-import { authHeader } from "../utils/axios";
+import { authHeader, customFetch } from "../utils";
 
 export const createJob = createAsyncThunk<
   CreateJobResponse,

@@ -1,9 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { CreateAsyncThunkTypes } from "../store/store";
-import customFetch from "../utils/axios";
 import { AllJobsGetResType } from "../interfaces/allJobs";
-import { authHeader } from "../utils";
+import { authHeader, customFetch } from "../utils";
 
 export const getAllJobs = createAsyncThunk<
   AllJobsGetResType,
