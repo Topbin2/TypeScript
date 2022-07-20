@@ -3,7 +3,7 @@ import { FaSuitcaseRolling, FaCalendarCheck, FaBug } from "react-icons/fa";
 import Wrapper from "../assets/wrappers/StatsContainer";
 import { useAppSelector } from "../hooks";
 
-interface Stats {
+export interface Stats {
   title: string;
   count: number;
   icon: JSX.Element;
