@@ -1,14 +1,24 @@
 import { useEffect } from "react";
 import { showStats } from "../../actions/allJobs";
-import { useAppDispatch } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { StatsContainer, ChartsContainer, Loading } from "../../components";
 
 const Stats = () => {
+  const { isLoading, monthlyApplications } = useAppSelector(
+    (state) => state.allJobs
+  );
+
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(showStats());
   }, [dispatch]);
 
-  return <h1>Stats</h1>;
+  return (
+    <>
+      <StatsContainer />
+      {monthlyApplications.length > 0 && <ChartsContainer />}
+    </>
+  );
 };
 
 export default Stats;
