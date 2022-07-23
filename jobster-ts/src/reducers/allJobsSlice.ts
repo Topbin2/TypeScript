@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { createSlice, Reducer } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, Reducer } from "@reduxjs/toolkit";
 
 import { getAllJobs, showStats } from "./../actions/allJobs";
 import { AllJobsFilteredState, AllJobsState } from "./../interfaces/allJobs";
@@ -23,6 +23,11 @@ const initialState: AllJobsState = {
   ...initialFilteredState,
 };
 
+export type FilterType = {
+  name: keyof AllJobsFilteredState;
+  value: any;
+};
+
 const allJobsSlice = createSlice({
   name: "allJobs",
   initialState,
@@ -32,6 +37,12 @@ const allJobsSlice = createSlice({
     },
     hideLoading: (state) => {
       state.isLoading = false;
+    },
+    handleChange: (
+      state,
+      { payload: { name, value } }: PayloadAction<FilterType>
+    ) => {
+      state[name] = value;
     },
   },
   extraReducers: (builder) =>
@@ -63,4 +74,5 @@ const allJobsSlice = createSlice({
 });
 
 export const { showLoading, hideLoading } = allJobsSlice.actions;
-export const allJobsReducer: Reducer<typeof initialState> = allJobsSlice.reducer;
+export const allJobsReducer: Reducer<typeof initialState> =
+  allJobsSlice.reducer;
