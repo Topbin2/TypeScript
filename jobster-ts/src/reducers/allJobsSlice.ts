@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, Reducer } from "@reduxjs/toolkit";
 
 import { getAllJobs, showStats } from "./../actions/allJobs";
 import { AllJobsFilteredState, AllJobsState } from "./../interfaces/allJobs";
@@ -63,5 +63,4 @@ const allJobsSlice = createSlice({
 });
 
 export const { showLoading, hideLoading } = allJobsSlice.actions;
-
-export default allJobsSlice.reducer;
+export const allJobsReducer: Reducer<typeof initialState> = allJobsSlice.reducer;

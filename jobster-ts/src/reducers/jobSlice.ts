@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, Reducer } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 import { getUserFromLocalStorage } from "../utils/localStorage";
@@ -75,4 +75,5 @@ const jobSlice = createSlice({
 
 export const { handleChange, clearValues, setEditJob } = jobSlice.actions;
 
-export default jobSlice.reducer;
+export const jobReducer: Reducer<typeof initialState> = jobSlice.reducer;
+

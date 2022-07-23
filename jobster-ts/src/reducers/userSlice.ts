@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { IUserState } from "./../interfaces/user";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, Reducer } from "@reduxjs/toolkit";
 import { registerUser, loginUser, updateUser } from "../actions/user";
 import {
   getUserFromLocalStorage,
@@ -80,4 +80,4 @@ const userSlice = createSlice({
 });
 
 export const { toggleSidebar, logoutUser } = userSlice.actions;
-export default userSlice.reducer;
+export const userReducer: Reducer<typeof initialState> = userSlice.reducer;
