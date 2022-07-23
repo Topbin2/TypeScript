@@ -1,19 +1,11 @@
-import { UserState, UserInfo } from "../interfaces/user";
+import { User, IUserData } from "./../interfaces/user";
+import { UserState } from "../interfaces/user";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { customFetch } from "../utils";
 import { logoutUser } from "../reducers/userSlice";
 import { CreateAsyncThunkTypes } from "../store/store";
-
-interface User {
-  user: UserInfo;
-}
-
-interface IUserData {
-  name: string;
-  email: string;
-  lastName: string;
-  location: string;
-}
+import { clearAllJobsState } from "../reducers/allJobsSlice";
+import { clearValues } from "../reducers/jobSlice";
 
 export const registerUser = createAsyncThunk<
   User,
@@ -62,3 +54,17 @@ export const updateUser = createAsyncThunk<
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 });
+
+export const clearStore = createAsyncThunk<any, string, CreateAsyncThunkTypes>(
+  "user/clearStore",
+  (message, thunkAPI) => {
+    try {
+      thunkAPI.dispatch(logoutUser(message));
+      thunkAPI.dispatch(clearAllJobsState());
+      thunkAPI.dispatch(clearValues());
+      return Promise.resolve();
+    } catch (error) {
+      return Promise.reject();
+    }
+  }
+);

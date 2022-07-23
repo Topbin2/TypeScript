@@ -1,3 +1,14 @@
+export interface User {
+  user: UserInfo;
+}
+
+export interface IUserData {
+  name: string;
+  email: string;
+  lastName: string;
+  location: string;
+}
+
 export interface IUserState {
   isLoading: boolean;
   isSidebarOpen: boolean;
