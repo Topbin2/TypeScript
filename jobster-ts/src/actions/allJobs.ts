@@ -1,4 +1,3 @@
-import { useAppSelector } from "./../hooks/useAppSelector";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { CreateAsyncThunkTypes } from "../store/store";
 import { AllJobsGetResType, showStatsResponse } from "../interfaces/allJobs";
@@ -10,7 +9,8 @@ export const getAllJobs = createAsyncThunk<
   CreateAsyncThunkTypes
 >("allJobs/getAllJobs", async (_, thunkAPI) => {
   try {
-    const { page, search, searchStatus, searchType, sort } = thunkAPI.getState().allJobs;
+    const { page, search, searchStatus, searchType, sort } =
+      thunkAPI.getState().allJobs;
     let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}&page=${page}`;
     if (search) url += `&search=${search}`;
     const response = await customFetch.get(url, authHeader(thunkAPI));
