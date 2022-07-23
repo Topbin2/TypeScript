@@ -50,3 +50,10 @@ export interface MonthlyApplication {
   date: string;
   count: number;
 }
+
+export type NameType = "search" | "searchStatus" | "searchType" | "sort";
+
+export type FilterType = {
+  name: NameType;
+  value: string;
+};

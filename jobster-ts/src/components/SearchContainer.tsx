@@ -2,6 +2,8 @@ import { FormRow, FormRowSelect } from "../components";
 import Wrapper from "../assets/wrappers/SearchContainer";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import { ChangeEvent, FormEvent } from "react";
+import { handleChange, clearFilters } from "../reducers/allJobsSlice";
+import { NameType } from "../interfaces";
 
 const SearchContainer = () => {
   const { isLoading, search, searchStatus, searchType, sort, sortOptions } =
@@ -10,7 +12,13 @@ const SearchContainer = () => {
     (store) => store.job
   );
   const dispatch = useAppDispatch();
-  const handleSearch = (e: ChangeEvent) => {};
+  const handleSearch = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    dispatch(
+      handleChange({ name: e.target.name as NameType, value: e.target.value })
+    );
+  };
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
   };

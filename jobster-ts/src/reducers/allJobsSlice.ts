@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { createSlice, PayloadAction, Reducer } from "@reduxjs/toolkit";
 
 import { getAllJobs, showStats } from "./../actions/allJobs";
-import { AllJobsFilteredState, AllJobsState } from "./../interfaces/allJobs";
+import { AllJobsFilteredState, AllJobsState, FilterType } from "./../interfaces/allJobs";
 
 const initialFilteredState: AllJobsFilteredState = {
   search: "",
@@ -21,11 +21,6 @@ const initialState: AllJobsState = {
   stats: { pending: null, interview: null, declined: null },
   monthlyApplications: [],
   ...initialFilteredState,
-};
-
-export type FilterType = {
-  name: keyof AllJobsFilteredState;
-  value: any;
 };
 
 const allJobsSlice = createSlice({
@@ -77,6 +72,7 @@ const allJobsSlice = createSlice({
       }),
 });
 
-export const { showLoading, hideLoading } = allJobsSlice.actions;
+export const { showLoading, hideLoading, handleChange, clearFilters } =
+  allJobsSlice.actions;
 export const allJobsReducer: Reducer<typeof initialState> =
   allJobsSlice.reducer;
