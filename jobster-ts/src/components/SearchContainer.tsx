@@ -21,6 +21,7 @@ const SearchContainer = () => {
   };
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    dispatch(clearFilters());
   };
 
   return (
