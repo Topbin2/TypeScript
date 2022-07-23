@@ -42,7 +42,11 @@ const allJobsSlice = createSlice({
       state,
       { payload: { name, value } }: PayloadAction<FilterType>
     ) => {
+      // state.page = 1;
       state[name] = value;
+    },
+    clearFilters: (state) => {
+      return { ...state, ...initialFilteredState };
     },
   },
   extraReducers: (builder) =>
