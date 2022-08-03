@@ -31,12 +31,16 @@ const Navbar = () => {
             type="button"
             className="btn"
             onClick={() => setShowLogout((prev) => !prev)}
+            data-testid="user-button"
           >
             <FaUserCircle />
             {user?.name}
             <FaCaretDown />
           </button>
-          <div className={showLogout ? "dropdown show-dropdown" : "dropdown"}>
+          <div
+            className={showLogout ? "dropdown show-dropdown" : "dropdown"}
+            data-testid="drop-down"
+          >
             <button
               type="button"
               className="dropdown-btn"

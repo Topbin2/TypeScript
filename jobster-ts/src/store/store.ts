@@ -1,20 +1,37 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {
+  combineReducers,
+  configureStore,
+  PreloadedState,
+} from "@reduxjs/toolkit";
 
 import { userReducer } from "../reducers/userSlice";
 import { jobReducer } from "../reducers/jobSlice";
 import { allJobsReducer } from "../reducers/allJobsSlice";
 
-const store = configureStore({
-  reducer: {
-    user: userReducer,
-    job: jobReducer,
-    allJobs: allJobsReducer,
-  },
+// export const store = configureStore({
+//   reducer: {
+//     user: userReducer,
+//     job: jobReducer,
+//     allJobs: allJobsReducer,
+//   },
+// });
+
+const rootReducer = combineReducers({
+  user: userReducer,
+  job: jobReducer,
+  allJobs: allJobsReducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+export function setupStore(preloadedState?: PreloadedState<RootState>) {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  });
+}
 
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore["dispatch"];
 
 export type CreateAsyncThunkTypes = {
   dispatch: AppDispatch;
@@ -22,4 +39,4 @@ export type CreateAsyncThunkTypes = {
   rejectValue: string;
 };
 
-export default store;
+export default setupStore;
