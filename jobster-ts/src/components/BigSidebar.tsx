@@ -12,6 +12,7 @@ const BigSidebar = () => {
         className={
           isSidebarOpen ? "sidebar-container" : "sidebar-container show-sidebar"
         }
+        data-testid="sidebar"
       >
         <div className="content">
           <header>

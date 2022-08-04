@@ -8,7 +8,7 @@ import {
   removeUserFromLocalStorage,
 } from "../utils/localStorage";
 
-const initialState: IUserState = {
+export const initialState: IUserState = {
   isLoading: false,
   isSidebarOpen: false,
   user: getUserFromLocalStorage(),
