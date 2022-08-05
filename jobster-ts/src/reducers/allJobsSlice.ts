@@ -16,7 +16,7 @@ const initialFilteredState: AllJobsFilteredState = {
   sortOptions: ["latest", "oldest", "a-z", "z-a"],
 };
 
-const initialState: AllJobsState = {
+export const initialState: AllJobsState = {
   isLoading: false,
   jobs: [],
   totalJobs: 0,

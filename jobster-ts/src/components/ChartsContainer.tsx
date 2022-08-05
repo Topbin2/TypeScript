@@ -11,6 +11,8 @@ const ChartsContainer = () => {
     (state) => state.allJobs
   );
 
+  console.log(data);
+
   return (
     <Wrapper>
       <h4>Monthly Applications</h4>
