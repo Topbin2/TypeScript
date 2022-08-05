@@ -1,9 +1,25 @@
-import { screen } from "@testing-library/react";
+import { findByRole, screen, waitFor } from "@testing-library/react";
 import { Navbar } from "../../components";
 import { render } from "../../utils/test-utils";
 import userEvent from "@testing-library/user-event";
+import setupStore from "../../store/store";
+import { loginUser } from "../../actions/user";
 
 describe("Navbar Component", () => {
+  it("user의 이름에 맞게 button의 텍스트가 변경된다.", async () => {
+    render(<Navbar />);
+
+    const store = setupStore();
+
+    await store.dispatch(
+      loginUser({ email: "sangbin@gmail.com", password: "123" })
+    );
+    console.log(store.getState().user.user?.name); // 'sangbin'으로 업데이트 되었음.
+
+    const button = await screen.findByTestId("user-button");
+    expect(button).toHaveTextContent("sangbin");
+  });
+
   it("user버튼을 클릭하면 logout 드랍다운이 나타난다.", () => {
     render(<Navbar />);
     const dropdown = screen.getByTestId("drop-down");
