@@ -1,13 +1,15 @@
 import userEvent from "@testing-library/user-event";
 import { BigSidebar } from "../../components";
+import { initialState, toggleSidebar } from "../../reducers/userSlice";
+import setupStore from "../../store/store";
 import { render, screen } from "../../utils/test-utils";
 
 describe("BigSidebar Component", () => {
-  it("user가 있다면 'show sidebar' className이 추가된다.", () => {
+  it("렌더링", () => {
     render(<BigSidebar />);
 
     const sidebar = screen.getByTestId("sidebar");
-    expect(sidebar).toHaveClass("show-sidebar");
+    expect(sidebar).toBeInTheDocument();
 
     const img = screen.getByAltText("jobster logo");
     expect(img).toBeInTheDocument();
@@ -17,5 +19,23 @@ describe("BigSidebar Component", () => {
 
     const allJobsLink = screen.getByText(/all jobs/i);
     expect(allJobsLink).toBeInTheDocument();
+  });
+
+  it("렌더링시 sidebar의 class는 'sidebar-container show-sidebar' 이다.", () => {
+    render(<BigSidebar />, {
+      preloadedState: { user: { ...initialState, isSidebarOpen: false } },
+    });
+
+    const sidebar = screen.getByTestId("sidebar");
+    expect(sidebar).toHaveClass("sidebar-container show-sidebar");
+  });
+
+  it("isSidebar의 상태가 true이면 sidebar의 'show-sidebar' class가 사라진다.", () => {
+    render(<BigSidebar />, {
+      preloadedState: { user: { ...initialState, isSidebarOpen: true } },
+    });
+
+    const sidebar = screen.getByTestId("sidebar");
+    expect(sidebar).toHaveClass("sidebar-container");
   });
 });

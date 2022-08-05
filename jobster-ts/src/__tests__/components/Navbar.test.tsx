@@ -1,9 +1,7 @@
-import { findByRole, screen, waitFor } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { Navbar } from "../../components";
 import { render } from "../../utils/test-utils";
 import userEvent from "@testing-library/user-event";
-import setupStore from "../../store/store";
-import { loginUser } from "../../actions/user";
 
 describe("Navbar Component", () => {
   it("user의 이름에 맞게 button의 텍스트가 변경된다.", () => {
@@ -24,7 +22,7 @@ describe("Navbar Component", () => {
     render(<Navbar />, {
       preloadedState: state,
     });
-    
+
     const button = screen.getByTestId("user-button");
     expect(button).toHaveTextContent("sangbin");
   });
