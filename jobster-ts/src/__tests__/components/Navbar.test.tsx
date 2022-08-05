@@ -6,17 +6,26 @@ import setupStore from "../../store/store";
 import { loginUser } from "../../actions/user";
 
 describe("Navbar Component", () => {
-  it("user의 이름에 맞게 button의 텍스트가 변경된다.", async () => {
-    render(<Navbar />);
+  it("user의 이름에 맞게 button의 텍스트가 변경된다.", () => {
+    const state = {
+      user: {
+        isLoading: false,
+        isSidebarOpen: false,
+        user: {
+          email: "asd",
+          lastName: "asd",
+          location: "asd",
+          name: "sangbin",
+          token: "asdasd",
+        },
+      },
+    };
 
-    const store = setupStore();
-
-    await store.dispatch(
-      loginUser({ email: "sangbin@gmail.com", password: "123" })
-    );
-    console.log(store.getState().user.user?.name); // 'sangbin'으로 업데이트 되었음.
-
-    const button = await screen.findByTestId("user-button");
+    render(<Navbar />, {
+      preloadedState: state,
+    });
+    
+    const button = screen.getByTestId("user-button");
     expect(button).toHaveTextContent("sangbin");
   });
 
