@@ -13,28 +13,30 @@ import {
 
 function App() {
   return (
-    <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <SharedLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<Stats />} />
-              <Route path="all-jobs" element={<AllJobs />} />
-              <Route path="add-job" element={<AddJob />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="stats" element={<Stats />} />
-            </Route>
-            <Route path="/landing" element={<Landing />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="*" element={<Error />} />
-          </Routes>
-          <ToastContainer position="top-center" />
-    </BrowserRouter>
+    // <BrowserRouter>
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <SharedLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<Stats />} />
+          <Route path="all-jobs" element={<AllJobs />} />
+          <Route path="add-job" element={<AddJob />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="stats" element={<Stats />} />
+        </Route>
+        <Route path="/landing" element={<Landing />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+      <ToastContainer position="top-center" />
+    </>
+    // </BrowserRouter>
   );
 }
 

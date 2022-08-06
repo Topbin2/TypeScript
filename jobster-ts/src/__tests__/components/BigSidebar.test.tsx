@@ -1,7 +1,5 @@
-import userEvent from "@testing-library/user-event";
 import { BigSidebar } from "../../components";
-import { initialState, toggleSidebar } from "../../reducers/userSlice";
-import setupStore from "../../store/store";
+import { initialState } from "../../reducers/userSlice";
 import { render, screen } from "../../utils/test-utils";
 
 describe("BigSidebar Component", () => {

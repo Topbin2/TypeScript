@@ -19,8 +19,20 @@ describe("NavLinks Component", () => {
 
     const stats = screen.getAllByRole("link");
 
+    expect(stats[0]).toHaveClass("nav-link");
+    userEvent.click(stats[0]);
+    expect(stats[0]).toHaveClass("nav-link active");
+
     expect(stats[1]).toHaveClass("nav-link");
     userEvent.click(stats[1]);
     expect(stats[1]).toHaveClass("nav-link active");
+
+    expect(stats[2]).toHaveClass("nav-link");
+    userEvent.click(stats[2]);
+    expect(stats[2]).toHaveClass("nav-link active");
+
+    expect(stats[3]).toHaveClass("nav-link");
+    userEvent.click(stats[3]);
+    expect(stats[3]).toHaveClass("nav-link active");
   });
 });

@@ -1,10 +1,11 @@
 import React, { PropsWithChildren } from "react";
 import { render as rtlRender } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter, BrowserRouter as Router } from "react-router-dom";
 import setupStore, { AppStore, RootState } from "../store/store";
 import type { RenderOptions } from "@testing-library/react";
 import type { PreloadedState } from "@reduxjs/toolkit";
+import userEvent from "@testing-library/user-event";
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, "queries"> {
   preloadedState?: PreloadedState<RootState>;
@@ -29,5 +30,13 @@ function render(
   return rtlRender(ui, { wrapper: Wrapper, ...renderOptions });
 }
 
+const renderWithRouter = (ui: React.ReactElement, { route = "/" } = {}) => {
+  window.history.pushState({}, "Test page", route);
+
+  return {
+    ...rtlRender(ui, { wrapper: BrowserRouter }),
+  };
+};
+
 export * from "@testing-library/react";
-export { render };
+export { render, renderWithRouter };
