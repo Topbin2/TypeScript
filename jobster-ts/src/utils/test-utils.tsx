@@ -5,12 +5,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 import setupStore, { AppStore, RootState } from "../store/store";
 import type { RenderOptions } from "@testing-library/react";
 import type { PreloadedState } from "@reduxjs/toolkit";
-import userEvent from "@testing-library/user-event";
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, "queries"> {
   preloadedState?: PreloadedState<RootState>;
   store?: AppStore;
-  route?: any;
+  route?: string;
 }
 
 function render(
@@ -22,7 +21,7 @@ function render(
     ...renderOptions
   }: ExtendedRenderOptions = {}
 ) {
-  window.history.pushState({}, "Test page", route);
+  window.history.pushState({}, "", route);
 
   function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
     return (

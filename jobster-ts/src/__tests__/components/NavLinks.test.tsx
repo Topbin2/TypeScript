@@ -35,4 +35,28 @@ describe("NavLinks Component", () => {
     userEvent.click(stats[3]);
     expect(stats[3]).toHaveClass("nav-link active");
   });
+
+  it("stats 메뉴는 '/' 로 연결된다.", () => {
+    render(<NavLinks />);
+    const stats = screen.getAllByRole("link")[0];
+    expect(stats).toHaveAttribute("href", "/");
+  });
+
+  it("all jobs 메뉴는 '/all-jobs' 로 연결된다.", () => {
+    render(<NavLinks />);
+    const allJobs = screen.getAllByRole("link")[1];
+    expect(allJobs).toHaveAttribute("href", "/all-jobs");
+  });
+
+  it("add job 메뉴는 'add-job' 로 연결된다.", () => {
+    render(<NavLinks />);
+    const addJob = screen.getAllByRole("link")[2];
+    expect(addJob).toHaveAttribute("href", "/add-job");
+  });
+
+  it("profile 메뉴는 'profile' 로 연결된다.", () => {
+    render(<NavLinks />);
+    const profile = screen.getAllByRole("link")[3];
+    expect(profile).toHaveAttribute("href", "/profile");
+  });
 });
