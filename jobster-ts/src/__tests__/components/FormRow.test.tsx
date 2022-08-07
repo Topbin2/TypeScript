@@ -21,7 +21,7 @@ describe("FormRow Component", () => {
     expect(input).toHaveAttribute("id", "position");
     expect(input).toHaveAttribute("type", "text");
     expect(input).toHaveAttribute("name", "position");
-    expect(input).toHaveAttribute("value", "");
+    expect(input).toHaveValue("");
 
     userEvent.type(input, "sangbin");
     expect(fn).toBeCalledTimes(7);
