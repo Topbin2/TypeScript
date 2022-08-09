@@ -17,6 +17,7 @@ const Wrapper = styled.article`
       letter-spacing: 0;
     }
   }
+
   .main-icon {
     width: 60px;
     height: 60px;
@@ -30,6 +31,7 @@ const Wrapper = styled.article`
     color: var(--white);
     margin-right: 2rem;
   }
+
   .info {
     h5 {
       margin-bottom: 0.25rem;
@@ -41,6 +43,7 @@ const Wrapper = styled.article`
       letter-spacing: var(--letterSpacing);
     }
   }
+
   .pending {
     background: #fcefc7;
     color: #e9b949;
@@ -80,24 +83,29 @@ const Wrapper = styled.article`
     height: 30px;
     margin-top: 0.5rem;
   }
+
   footer {
     margin-top: 1rem;
   }
+
   .edit-btn,
   .delete-btn {
     letter-spacing: var(--letterSpacing);
     cursor: pointer;
     height: 30px;
   }
+
   .edit-btn {
     color: var(--green-dark);
     background: var(--green-light);
     margin-right: 0.5rem;
   }
+
   .delete-btn {
     color: var(--red-dark);
     background: var(--red-light);
   }
+  
   &:hover .actions {
     visibility: visible;
   }

@@ -8,14 +8,6 @@ import { userReducer } from "../reducers/userSlice";
 import { jobReducer } from "../reducers/jobSlice";
 import { allJobsReducer } from "../reducers/allJobsSlice";
 
-// export const store = configureStore({
-//   reducer: {
-//     user: userReducer,
-//     job: jobReducer,
-//     allJobs: allJobsReducer,
-//   },
-// });
-
 const rootReducer = combineReducers({
   user: userReducer,
   job: jobReducer,
@@ -25,6 +17,7 @@ const rootReducer = combineReducers({
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
   return configureStore({
     reducer: rootReducer,
+    devTools: process.env.NODE_ENV !== "production",
     preloadedState,
   });
 }

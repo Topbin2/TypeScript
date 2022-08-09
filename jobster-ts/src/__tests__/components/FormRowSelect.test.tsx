@@ -1,4 +1,3 @@
-import userEvent from "@testing-library/user-event";
 import { FormRowSelect } from "../../components";
 import { render, screen } from "../../utils/test-utils";
 

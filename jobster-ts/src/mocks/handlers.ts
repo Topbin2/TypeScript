@@ -1,6 +1,7 @@
 import { rest } from "msw";
 
 export const handlers = [
+
   rest.post(
     "https://jobify-prod.herokuapp.com/api/v1/toolkit/auth/register",
     (req, res, ctx) => {
@@ -17,6 +18,7 @@ export const handlers = [
       );
     }
   ),
+
   rest.post(
     "https://jobify-prod.herokuapp.com/api/v1/toolkit/auth/login",
     (req, res, ctx) => {
@@ -33,6 +35,7 @@ export const handlers = [
       );
     }
   ),
+  
   rest.patch(
     "https://jobify-prod.herokuapp.com/api/v1/toolkit/auth/updateUser",
     (req, res, ctx) => {

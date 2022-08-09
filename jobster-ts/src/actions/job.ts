@@ -34,7 +34,7 @@ export const editJob = createAsyncThunk<
   EditJobResponse,
   EditJobActionPayload,
   CreateAsyncThunkTypes
->("job/editJob", async ({ jobId, job }, thunkAPI) => {
+>("job/editJob", async ({ jobId, job }, thunkAPI) => { 
   try {
     const response = await customFetch.patch(
       `/jobs/${jobId}`,
