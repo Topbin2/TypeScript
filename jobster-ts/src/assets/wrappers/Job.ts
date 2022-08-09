@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.article`
   background: var(--white);
@@ -105,7 +105,7 @@ const Wrapper = styled.article`
     color: var(--red-dark);
     background: var(--red-light);
   }
-  
+
   &:hover .actions {
     visibility: visible;
   }

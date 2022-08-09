@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
-import Wrapper from "../assets/wrappers/Navbar";
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from "react-icons/fa";
+import Wrapper from "../assets/wrappers/Navbar";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import Logo from "./Logo";
 import { toggleSidebar } from "../reducers/userSlice";

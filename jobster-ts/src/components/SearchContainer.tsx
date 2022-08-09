@@ -1,7 +1,7 @@
-import { FormRow, FormRowSelect } from "../components";
+import { ChangeEvent, FormEvent } from "react";
+import { FormRow, FormRowSelect } from ".";
 import Wrapper from "../assets/wrappers/SearchContainer";
 import { useAppSelector, useAppDispatch } from "../hooks";
-import { ChangeEvent, FormEvent } from "react";
 import { handleChange, clearFilters } from "../reducers/allJobsSlice";
 import { NameType } from "../interfaces";
 
@@ -60,6 +60,7 @@ const SearchContainer = () => {
             list={sortOptions}
           />
           <button
+            type="submit"
             className="btn btn-block btn-danger"
             disabled={isLoading}
             onClick={handleSubmit}

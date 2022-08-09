@@ -1,12 +1,12 @@
 import { toast } from "react-toastify";
 import { createSlice, PayloadAction, Reducer } from "@reduxjs/toolkit";
 
-import { getAllJobs, showStats } from "./../actions/allJobs";
+import { getAllJobs, showStats } from "../actions/allJobs";
 import {
   AllJobsFilteredState,
   AllJobsState,
   FilterType,
-} from "./../interfaces/allJobs";
+} from "../interfaces/allJobs";
 
 const initialFilteredState: AllJobsFilteredState = {
   search: "",
@@ -54,7 +54,7 @@ const allJobsSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      //getAllJobs
+      // getAllJobs
       .addCase(getAllJobs.pending, (state) => {
         state.isLoading = true;
       })

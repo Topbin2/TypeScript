@@ -1,8 +1,8 @@
+import { toast } from "react-toastify";
+import { ChangeEvent, FormEvent, useCallback, useEffect } from "react";
 import { FormRow, FormRowSelect } from "../../components";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { toast } from "react-toastify";
-import { ChangeEvent, FormEvent, useCallback, useEffect } from "react";
 import { handleChange, clearValues } from "../../reducers/jobSlice";
 import { FormName } from "../../interfaces/job";
 import { createJob, editJob } from "../../actions/job";
@@ -47,13 +47,22 @@ const AddJob = () => {
       }
       dispatch(createJob({ position, company, jobLocation, jobType, status }));
     },
-    [position, company, jobLocation, jobType, status, editJobId, isEditing ,dispatch]
+    [
+      position,
+      company,
+      jobLocation,
+      jobType,
+      status,
+      editJobId,
+      isEditing,
+      dispatch,
+    ]
   );
 
   const handleJobInput = useCallback(
     (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const name = e.target.name as FormName;
-      const value = e.target.value;
+      const { value } = e.target;
       dispatch(handleChange({ name, value }));
     },
     [dispatch]

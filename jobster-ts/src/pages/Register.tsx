@@ -7,9 +7,9 @@ import {
 } from "react";
 import { useNavigate } from "react-router";
 
+import { toast } from "react-toastify";
 import { Logo, FormRow } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
-import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { loginUser, registerUser } from "../actions/user";
 
@@ -43,8 +43,8 @@ const Register = () => {
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      const name = e.target.name;
-      const value = e.target.value;
+      const { name } = e.target;
+      const { value } = e.target;
       setValues({ ...values, [name]: value });
     },
     [values]

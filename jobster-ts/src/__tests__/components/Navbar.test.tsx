@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Navbar } from "../../components";
 import { render } from "../../utils/test-utils";
-import userEvent from "@testing-library/user-event";
 
 describe("Navbar Component", () => {
   it("user의 이름에 맞게 button의 텍스트가 변경된다.", () => {

@@ -1,4 +1,3 @@
-import { MonthlyApplication } from "../interfaces/allJobs";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -8,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import { MonthlyApplication } from "../interfaces/allJobs";
 
 interface IProps {
   data: Array<MonthlyApplication>;

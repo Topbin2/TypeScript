@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { showStats } from "../../actions/allJobs";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { StatsContainer, ChartsContainer, Loading } from "../../components";
+import { StatsContainer, ChartsContainer } from "../../components";
 
 const Stats = () => {
   const { isLoading, monthlyApplications } = useAppSelector(

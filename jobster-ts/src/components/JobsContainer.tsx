@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import Wrapper from "../assets/wrappers/JobsContainer";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { Job, Loading } from "../components";
+import { Job, Loading } from ".";
 import { getAllJobs } from "../actions/allJobs";
 import PageBtnContainer from "./PageBtnContainer";
 
@@ -25,7 +25,7 @@ const JobsContainer = () => {
   }, [dispatch, page, search, searchStatus, searchType, sort]);
 
   if (isLoading) {
-    return <Loading center={true} />;
+    return <Loading center />;
   }
 
   if (jobs.length === 0) {

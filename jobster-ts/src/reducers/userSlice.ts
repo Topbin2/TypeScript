@@ -1,7 +1,12 @@
 import { toast } from "react-toastify";
-import { IUserState } from "./../interfaces/user";
 import { createSlice, PayloadAction, Reducer } from "@reduxjs/toolkit";
-import { registerUser, loginUser, updateUser, clearStore } from "../actions/user";
+import { IUserState } from "../interfaces/user";
+import {
+  registerUser,
+  loginUser,
+  updateUser,
+  clearStore,
+} from "../actions/user";
 import {
   getUserFromLocalStorage,
   addUserToLocalStorage,
@@ -78,8 +83,8 @@ const userSlice = createSlice({
         toast.error(payload);
       })
       .addCase(clearStore.rejected, () => {
-        toast.error('There was an error..');
-      })
+        toast.error("There was an error..");
+      }),
 });
 
 export const { toggleSidebar, logoutUser } = userSlice.actions;

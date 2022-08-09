@@ -1,4 +1,3 @@
-import { MonthlyApplication } from "../interfaces/allJobs";
 import {
   BarChart,
   Bar,
@@ -8,6 +7,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { MonthlyApplication } from "../interfaces/allJobs";
 
 interface IProps {
   data: Array<MonthlyApplication>;

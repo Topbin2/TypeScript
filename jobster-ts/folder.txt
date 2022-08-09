@@ -1,0 +1,16 @@
+├── src
+│   ├── assets
+│   │   ├── css
+│   │   ├── images
+│   │   └── wrappers
+│   ├── components
+│   ├── hooks
+│   ├── types
+│   ├── mocks
+│   ├── pages
+│   ├── redux
+│   │   ├── store
+│   │   ├── reducers
+│   │   └── actions
+│   └── utils
+

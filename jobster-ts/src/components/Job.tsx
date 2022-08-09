@@ -1,10 +1,10 @@
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import Wrapper from "../assets/wrappers/Job";
 import { useAppDispatch } from "../hooks";
 import { JobType } from "../interfaces/allJobs";
 import { JobInfo } from "./index";
-import moment from "moment";
 import { deleteJob } from "../actions/job";
 import { setEditJob } from "../reducers/jobSlice";
 

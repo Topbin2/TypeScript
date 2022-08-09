@@ -1,6 +1,5 @@
-import { User, IUserData } from "./../interfaces/user";
-import { UserState } from "../interfaces/user";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { User, IUserData, UserState } from "../interfaces/user";
 import { customFetch } from "../utils";
 import { logoutUser } from "../reducers/userSlice";
 import { CreateAsyncThunkTypes } from "../store/store";

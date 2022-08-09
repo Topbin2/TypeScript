@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, Reducer } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 import { getUserFromLocalStorage } from "../utils/localStorage";
-import { JobState, FormPayload, SetEditJobPayload } from "./../interfaces/job";
+import { JobState, FormPayload, SetEditJobPayload } from "../interfaces/job";
 import { createJob, deleteJob, editJob } from "../actions/job";
 
 const initialState: JobState = {
@@ -42,7 +42,7 @@ const jobSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      //createJob
+      // createJob
       .addCase(createJob.pending, (state) => {
         state.isLoading = true;
       })

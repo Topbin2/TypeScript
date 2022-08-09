@@ -1,6 +1,6 @@
-import { getAllJobs } from "./allJobs";
-import { CreateAsyncThunkTypes } from "./../store/store";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getAllJobs } from "./allJobs";
+import { CreateAsyncThunkTypes } from "../store/store";
 import { clearValues } from "../reducers/jobSlice";
 import { logoutUser } from "../reducers/userSlice";
 import {
@@ -26,7 +26,7 @@ export const createJob = createAsyncThunk<
       thunkAPI.dispatch(logoutUser());
       return thunkAPI.rejectWithValue("Unauthorized! Logging Out...");
     }
-    thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 });
 
@@ -34,7 +34,7 @@ export const editJob = createAsyncThunk<
   EditJobResponse,
   EditJobActionPayload,
   CreateAsyncThunkTypes
->("job/editJob", async ({ jobId, job }, thunkAPI) => { 
+>("job/editJob", async ({ jobId, job }, thunkAPI) => {
   try {
     const response = await customFetch.patch(
       `/jobs/${jobId}`,
@@ -44,7 +44,7 @@ export const editJob = createAsyncThunk<
     thunkAPI.dispatch(clearValues());
     return response.data;
   } catch (error: any) {
-    thunkAPI.rejectWithValue(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 });
 

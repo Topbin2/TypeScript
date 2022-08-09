@@ -1,9 +1,8 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useCallback } from "react";
+import { toast } from "react-toastify";
 import { FormRow } from "../../components";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { toast } from "react-toastify";
-import { useCallback } from "react";
 import { updateUser } from "../../actions/user";
 
 interface IUserData {
@@ -39,8 +38,8 @@ const Profile = () => {
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      const name = e.target.name;
-      const value = e.target.value;
+      const { name } = e.target;
+      const { value } = e.target;
       setUserData({ ...userData, [name]: value });
     },
     [userData]
