@@ -4,9 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 import { StatsContainer, ChartsContainer } from "../../components";
 
 const Stats = () => {
-  const { isLoading, monthlyApplications } = useAppSelector(
-    (state) => state.allJobs
-  );
+  const { monthlyApplications } = useAppSelector((state) => state.allJobs);
 
   const dispatch = useAppDispatch();
   useEffect(() => {

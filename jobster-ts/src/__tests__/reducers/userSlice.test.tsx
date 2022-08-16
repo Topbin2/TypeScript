@@ -1,3 +1,4 @@
+import { registerUser } from "actions/user";
 import { IUserState } from "../../interfaces";
 import {
   userReducer,
@@ -34,9 +35,38 @@ test("logoutUser action", () => {
       token: "some token",
     },
   };
+
   expect(userReducer(previousState, logoutUser())).toEqual({
     isLoading: false,
     isSidebarOpen: false,
     user: null,
   });
+});
+
+test("registerUser.pending action", () => {
+  expect(
+    userReducer(initialState, {
+      type: registerUser.pending,
+      paylaod: { email: "mosangbin@gmai1l.com", password: "123" },
+    })
+  ).toEqual({ isLoading: true, isSidebarOpen: false, user: null });
+});
+
+test.only("registerUser.fulfilled action", async () => {
+  const action = {
+    type: registerUser.rejected,
+    paylaod: {
+      user: {
+        email: "mosangbin@gmai1l.com",
+        lastName: "lastName",
+        location: "my city",
+        name: "모상빈",
+        token: "eyJhbGciOiJIUzI1NiIsInR",
+      },
+    },
+  };
+
+  const state = userReducer(initialState, action);
+
+  expect(state).toEqual({ isLoading: false, isSidebarOpen: false, user: null });
 });
