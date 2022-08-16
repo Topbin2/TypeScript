@@ -42,9 +42,9 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(registerUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
         console.log(payload);
         const { user } = payload;
-        state.isLoading = false;
         state.user = user;
         addUserToLocalStorage(user);
         toast.success(`Hello There ${user.name}`);

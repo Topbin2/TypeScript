@@ -44,18 +44,18 @@ test("logoutUser action", () => {
 });
 
 test("registerUser.pending action", () => {
-  expect(
-    userReducer(initialState, {
-      type: registerUser.pending,
-      paylaod: { email: "mosangbin@gmai1l.com", password: "123" },
-    })
-  ).toEqual({ isLoading: true, isSidebarOpen: false, user: null });
+  const action = registerUser.pending;
+  const state = userReducer(initialState, action);
+  expect(state).toEqual({
+    isLoading: true,
+    isSidebarOpen: false,
+    user: null,
+  });
 });
 
-test.only("registerUser.fulfilled action", async () => {
-  const action = {
-    type: registerUser.rejected,
-    paylaod: {
+test("registerUser.fulfilled action1", async () => {
+  const action = registerUser.fulfilled(
+    {
       user: {
         email: "mosangbin@gmai1l.com",
         lastName: "lastName",
@@ -64,9 +64,32 @@ test.only("registerUser.fulfilled action", async () => {
         token: "eyJhbGciOiJIUzI1NiIsInR",
       },
     },
-  };
+    "",
+    { email: "mosangbin@gmai1l.com", password: "123" }
+  );
 
   const state = userReducer(initialState, action);
+  expect(state).toEqual({
+    isLoading: false,
+    isSidebarOpen: false,
+    user: {
+      email: "mosangbin@gmai1l.com",
+      lastName: "lastName",
+      location: "my city",
+      name: "모상빈",
+      token: "eyJhbGciOiJIUzI1NiIsInR",
+    },
+  });
+});
 
-  expect(state).toEqual({ isLoading: false, isSidebarOpen: false, user: null });
+test("registerUser.rejected action", () => {
+  const prevState = { isLoading: true, isSidebarOpen: false, user: null };
+  const action = registerUser.rejected;
+  const result = userReducer(prevState, action);
+
+  expect(result).toEqual({
+    isLoading: false,
+    isSidebarOpen: false,
+    user: null,
+  });
 });
